@@ -1,0 +1,37 @@
+{
+  "name": "blaster",
+  "version": "0.1.0",
+  "description": "api record & replay tool",
+  "bin": {
+    "blaster": "./bin/main.js"
+  },
+  "main": "./bin/main.js",
+  "scripts": {
+    "compile": "tsc",
+    "test": "mocha -r ts-node/register src/**/__tests__/*.ts"
+  },
+  "keywords": [
+    "record",
+    "replay"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chai": "^4.0.3",
+    "@types/js-yaml": "^3.9.0",
+    "@types/lodash": "^4.14.72",
+    "@types/minimist": "^1.2.0",
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^8.0.20",
+    "chai": "^4.1.1",
+    "mocha": "^3.5.0",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.6.0",
+    "typescript": "2.4.2"
+  },
+  "dependencies": {
+    "js-yaml": "^3.9.1",
+    "lodash": "^4.17.4",
+    "minimist": "^1.2.0"
+  }
+}
