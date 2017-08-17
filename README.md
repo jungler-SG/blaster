@@ -1,8 +1,13 @@
+
 # Blaster
 
-**Blaster is a tool of record & replay REST API, build by typescript**
+**Blaster is a tool of record & replay RESTful services for front-end projects, build with typescript**
 
 ## Dev
+
+Install dependencies
+
+    npm install
 
 Compile Blaster
 
