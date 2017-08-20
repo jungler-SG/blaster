@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var pkg = require(__dirname + '/../package.json');
-var fs = require("fs");
-var minimist = require("minimist");
-var jsyaml = require("js-yaml");
+var pkg = require(__dirname + "/../package.json");
 var _ = require("lodash");
-process.on('SIGINT', function () {
-    console.log('Got a sigint bye...');
+var fs = require("fs");
+var jsyaml = require("js-yaml");
+var minimist = require("minimist");
+var BlasterServer_1 = require("./BlasterServer");
+process.on("SIGINT", function () {
+    console.log("Got a sigint bye...");
     process.exit(0);
 });
 function blasterInfo(args) {
@@ -23,7 +24,8 @@ function blasterInfo(args) {
 exports.blasterInfo = blasterInfo;
 function startup(args) {
     try {
-        var _options = jsyaml.safeLoad(fs.readFileSync(args._[1], 'utf8'));
+        new BlasterServer_1.default().start();
+        var options = jsyaml.safeLoad(fs.readFileSync(args._[1], "utf8"));
     }
     catch (e) {
         console.log("Please follow readme to provide correct .yml file.");
@@ -35,4 +37,4 @@ function main(args) {
     startup(args);
 }
 exports.default = main;
-main(minimist(process.argv.slice(2), { alias: { help: 'h', version: 'v', extions: 'e' } }));
+main(minimist(process.argv.slice(2), { alias: { help: "h", version: "v", extions: "e" } }));

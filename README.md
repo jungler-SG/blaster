@@ -32,4 +32,4 @@ Link npm package to local
 | edit response data                              | TODO       |           |
 | create new endpoint & record in local database  | TODO       |           |
 | multiple real backend support                   | TODO       |           |
-| whitelist endpoit support                       | TODO       |           |
+| whitelist endpoint support                      | TODO       |           |

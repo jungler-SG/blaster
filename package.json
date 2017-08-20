@@ -8,7 +8,8 @@
   "main": "./bin/main.js",
   "scripts": {
     "compile": "tsc",
-    "test": "mocha -r ts-node/register src/**/__tests__/*.ts"
+    "test": "mocha -r ts-node/register src/**/__tests__/*.ts",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'"
   },
   "keywords": [
     "record",
@@ -19,10 +20,13 @@
   "devDependencies": {
     "@types/chai": "^4.0.3",
     "@types/js-yaml": "^3.9.0",
+    "@types/koa": "^2.0.39",
     "@types/lodash": "^4.14.72",
     "@types/minimist": "^1.2.0",
     "@types/mocha": "^2.2.41",
     "@types/node": "^8.0.20",
+    "@types/request": "^2.0.1",
+    "@types/request-promise": "^4.1.36",
     "chai": "^4.1.1",
     "mocha": "^3.5.0",
     "ts-node": "^3.3.0",
@@ -31,7 +35,10 @@
   },
   "dependencies": {
     "js-yaml": "^3.9.1",
+    "koa": "^2.3.0",
     "lodash": "^4.17.4",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1"
   }
 }
