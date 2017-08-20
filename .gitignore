@@ -1,3 +1,4 @@
 node_modules/
 .idea/
 blaster.iml
+.DS_Store
