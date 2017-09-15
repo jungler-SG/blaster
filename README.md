@@ -29,7 +29,7 @@ Run Blaster
 
 | Feature                                         | Status     | Owner     |
 | ----------------------------------------------- |:----------:| ---------:|
-| yaml server configuration handler               | TODO       |           |
+| yaml server configuration handler               | TODO       |   Hou     |
 | start **http/https** server                     | TODO       |           |
 | setup NeDB                                      | TODO       |   Jeff    |
 | record get/post request to local database       | TODO       |           |
