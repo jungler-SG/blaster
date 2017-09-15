@@ -53,9 +53,8 @@ var BlasterServer = (function () {
                         console.log("Blaster started on port 3000...");
                         if (!module.parent) {
                             server = app.listen(3000);
-                            return [2 /*return*/, Promise.resolve(server)];
                         }
-                        return [2 /*return*/, null];
+                        return [2 /*return*/, Promise.resolve(server)];
                 }
             });
         });

@@ -13,13 +13,17 @@ Compile Blaster
 
     npm run compile
 
-Run test
+Run dev scripts
 
-    npm run test
+    npm run test / test:watch / lint / lint:watch
 
 Link npm package to local
 
     npm link
+
+Run Blaster
+
+	blaster
 
 ## TODO & feature list
 
@@ -27,6 +31,7 @@ Link npm package to local
 | ----------------------------------------------- |:----------:| ---------:|
 | yaml server configuration handler               | TODO       |           |
 | start **http/https** server                     | TODO       |           |
+| setup NeDB                                      | TODO       |   Jeff    |
 | record get/post request to local database       | TODO       |           |
 | replay response from local database             | TODO       |           |
 | edit response data                              | TODO       |           |
