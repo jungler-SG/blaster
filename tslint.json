@@ -12,6 +12,10 @@
         "ignore-pattern": "^_"
       }
     ],
-    "ordered-imports": false
+    "ordered-imports": false,
+    "no-trailing-whitespace": [
+      true,
+      "ignore-comments"
+    ]
   }
 }
