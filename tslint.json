@@ -1,13 +1,17 @@
 {
   "extends": "tslint:recommended",
   "rules": {
-    "use-strict": true,
     "no-console": false,
+    "no-var-requires": false,
     "max-line-length": [
       150
     ],
     "no-unused-variable": [
-      true
-    ]
+      true,
+      {
+        "ignore-pattern": "^_"
+      }
+    ],
+    "ordered-imports": false
   }
 }

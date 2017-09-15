@@ -27,12 +27,12 @@ export function startup(args) {
     try {
         new BlasterServer().start();
         const options = jsyaml.safeLoad(fs.readFileSync(args._[1], "utf8"));
-    }catch (e) {
+    } catch (e) {
         console.log("Please follow readme to provide correct .yml file.");
     }
 }
 
-export default function main(args) {
+function main(args) {
     _.forEach(blasterInfo(args), (info) => console.log(info));
     startup(args);
 }

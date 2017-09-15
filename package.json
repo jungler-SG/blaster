@@ -6,10 +6,14 @@
     "blaster": "./bin/main.js"
   },
   "main": "./bin/main.js",
+  "watch": {
+    "lint": "src/main.ts"
+  },
   "scripts": {
     "compile": "tsc",
-    "test": "mocha -r ts-node/register src/**/__tests__/*.ts",
-    "lint": "tslint -c tslint.json 'src/**/*.ts'"
+    "test": "mocha -r ts-node/register src/**/__tests__/*.ts -t verbose",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "watch": "npm-watch"
   },
   "keywords": [
     "record",
@@ -29,6 +33,7 @@
     "@types/request-promise": "^4.1.36",
     "chai": "^4.1.1",
     "mocha": "^3.5.0",
+    "npm-watch": "^0.2.0",
     "ts-node": "^3.3.0",
     "tslint": "^5.6.0",
     "typescript": "2.4.2"

@@ -36,5 +36,4 @@ function main(args) {
     _.forEach(blasterInfo(args), function (info) { return console.log(info); });
     startup(args);
 }
-exports.default = main;
 main(minimist(process.argv.slice(2), { alias: { help: "h", version: "v", extions: "e" } }));
