@@ -8,7 +8,8 @@
   "main": "./bin/main.js",
   "scripts": {
     "compile": "tsc",
-    "test": "mocha -r ts-node/register src/**/__tests__/*.ts -t verbose",
+    "test": "mocha - -r ts-node/register --reporter spec \"src/**/__tests__/*.ts\" -t verbose",
+    "test:watch": "npm run test -- --watch --watch-extensions ts",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "lint:watch": "chokidar webpack.config.* src/*.ts src/**/*.ts buildScripts/**/*.ts -c \"npm run lint\" --initial --verbose"
   },

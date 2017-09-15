@@ -8,8 +8,11 @@ export default class BlasterServer {
     public async start() {
         const app = await this.createApp();
         console.log("Blaster started on port 3000...");
-        const server = app.listen(3000);
-        return Promise.resolve(server);
+        if(!module.parent) {
+            const server = app.listen(3000);
+            return Promise.resolve(server);
+        }
+        return null;
     }
 
     private async createApp() {
