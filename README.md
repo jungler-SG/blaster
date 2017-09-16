@@ -1,6 +1,9 @@
 
 # Blaster
 
+[![Gitter](https://img.shields.io/gitter/room/gitterHQ/gitter.svg)](https://gitter.im/blaster-record-replay) To chat with the contributors.
+
+
 **Blaster is a tool of record & replay RESTful services for front-end projects, build with typescript**
 
 ## Dev
