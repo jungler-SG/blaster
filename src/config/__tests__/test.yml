@@ -1,0 +1,14 @@
+---
+  server:
+    port: 8888
+    proxyType: "HTTP"
+    replay: true
+  targets:
+    -
+      hostName: "test1.com"
+      endpoint: "/api/test1"
+      port: 80
+    -
+      hostName: "test2.com"
+      endpoint: "/api/test2"
+      port: 80

@@ -2,10 +2,10 @@
 const pkg = require(__dirname + "/../package.json");
 import * as _ from "lodash";
 import * as fs from "fs";
-import * as jsyaml from "js-yaml";
 import * as minimist from "minimist";
 
 import BlasterServer from "./BlasterServer";
+import BlasterConfigurer from "./config/BlasterConfigurer";
 
 process.on("SIGINT",  () => {
   console.log("Got a sigint bye...");
@@ -25,8 +25,8 @@ export function blasterInfo(args) {
 
 export function startup(args) {
     try {
+        BlasterConfigurer.getInstance(fs.readFileSync(args._[0], "utf8"));
         new BlasterServer().start();
-        const options = jsyaml.safeLoad(fs.readFileSync(args._[1], "utf8"));
     } catch (e) {
         console.log("Please follow readme to provide correct .yml file.");
     }
