@@ -8,7 +8,10 @@
   "main": "./bin/main.js",
   "scripts": {
     "compile": "tsc",
-    "test": "mocha -r ts-node/register src/**/__tests__/*.ts"
+    "test": "mocha - -r ts-node/register --reporter spec \"src/**/__tests__/*.ts\" -t verbose",
+    "test:watch": "npm run test -- --watch --watch-extensions ts",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "lint:watch": "chokidar webpack.config.* src/*.ts src/**/*.ts buildScripts/**/*.ts -c \"npm run lint\" --initial --verbose"
   },
   "keywords": [
     "record",
@@ -17,21 +20,29 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@types/chai": "^4.0.3",
-    "@types/js-yaml": "^3.9.0",
+    "@types/chai": "^4.0.4",
+    "@types/js-yaml": "^3.9.1",
+    "@types/koa": "^2.0.39",
     "@types/lodash": "^4.14.72",
     "@types/minimist": "^1.2.0",
-    "@types/mocha": "^2.2.41",
-    "@types/node": "^8.0.20",
-    "chai": "^4.1.1",
-    "mocha": "^3.5.0",
+    "@types/mocha": "^2.2.43",
+    "@types/node": "^8.0.28",
+    "@types/request": "^2.0.3",
+    "@types/request-promise": "^4.1.37",
+    "chai": "^4.1.2",
+    "chokidar-cli": "^1.2.0",
+    "mocha": "^3.5.3",
     "ts-node": "^3.3.0",
-    "tslint": "^5.6.0",
-    "typescript": "2.4.2"
+    "tslint": "^5.7.0",
+    "typescript": "2.4.2",
+    "webpack": "1.13.0"
   },
   "dependencies": {
-    "js-yaml": "^3.9.1",
+    "js-yaml": "^3.10.0",
+    "koa": "^2.3.0",
     "lodash": "^4.17.4",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1"
   }
 }
