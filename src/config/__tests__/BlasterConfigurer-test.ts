@@ -5,7 +5,9 @@ import BlasterConfigurer from "../BlasterConfigurer";
 
 describe("BlasterConfigurer", () => {
 
-    let path, blasterConfigurer;
+    let path;
+    let blasterConfigurer;
+
     beforeEach(() => {
         path = fs.readFileSync(__dirname + "/test.yml", "utf8");
         blasterConfigurer = BlasterConfigurer.getInstance(path);
