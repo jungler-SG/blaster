@@ -73,18 +73,47 @@ describe("ServiceRecorder Tests", () => {
     });
 
     it("should store a new GET", (done) => {
-        const tingoDb = recorder;
-        tingoDb.storeGet(mockTransactionGet, (error: any, result: any) => {
-            assert(!error);
-            assert(mockTransactionGet.request.header === result[0].request.header);
-            assert(mockTransactionGet.request.url === result[0].request.url);
-            assert(mockTransactionGet.request.queryParam === result[0].request.queryParam);
-            assert(mockTransactionGet.request.method === result[0].request.method);
-            assert(mockTransactionGet.response.status === result[0].response.status);
-            assert(mockTransactionGet.response.header === result[0].response.header);
-            assert(mockTransactionGet.response.body === result[0].response.body);
-            done();
-        });
-
+        Q.nfcall(recorder.storeGet, mockTransactionGet)
+            .fail((error) => {
+                assert(!error);
+            })
+            .done((result: any): any => {
+                assert(mockTransactionGet.request.header === result[0].request.header);
+                assert(mockTransactionGet.request.url === result[0].request.url);
+                assert(mockTransactionGet.request.queryParam === result[0].request.queryParam);
+                assert(mockTransactionGet.request.method === result[0].request.method);
+                assert(mockTransactionGet.response.status === result[0].response.status);
+                assert(mockTransactionGet.response.header === result[0].response.header);
+                assert(mockTransactionGet.response.body === result[0].response.body);
+                done();
+            });
     });
+
+    it("should return null when a GET request is not there", (done) => {
+        Q.nfcall(recorder.hasGetRequest, mockTransactionGet.request)
+            .fail((error) => {
+                console.log("error", error);
+                assert(!error);
+            })
+            .done((result) => {
+                assert(!result);
+                done();
+            });
+    });
+
+    it("should return result when a GET request is already there", (done) => {
+        Q.nfcall(recorder.storeGet, mockTransactionGet)
+            .then(() => {
+                return Q.nfcall(recorder.hasGetRequest, mockTransactionGet.request);
+            })
+            .fail((error) => {
+                console.log("error", error);
+                assert(!error);
+            })
+            .done((result) => {
+                assert(result);
+                done();
+            });
+    });
+
 });
