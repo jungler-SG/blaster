@@ -16,6 +16,8 @@
     "no-trailing-whitespace": [
       false,
       "ignore-comments"
-    ]
+    ],
+    "object-literal-sort-keys": false,
+    "trailing-comma": false
   }
 }
