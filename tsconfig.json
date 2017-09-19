@@ -4,7 +4,7 @@
     "lib": ["es6", "esnext", "es2015.promise"],
     "module": "commonjs",
     "moduleResolution": "node",
-    "sourceMap": false,
+    "sourceMap": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "declaration": false,

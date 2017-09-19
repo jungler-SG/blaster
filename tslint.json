@@ -14,7 +14,7 @@
     ],
     "ordered-imports": false,
     "no-trailing-whitespace": [
-      true,
+      false,
       "ignore-comments"
     ]
   }

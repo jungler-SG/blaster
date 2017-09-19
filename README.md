@@ -34,7 +34,7 @@ Run Blaster
 | ----------------------------------------------- |:----------:| ---------:|
 | yaml server configuration handler               | TODO       |   Hou     |
 | start **http/https** server                     | TODO       |           |
-| setup NeDB                                      | TODO       |   Jeff    |
+| explore and setup local db                      | TODO       |   Jeff    |
 | record get/post request to local database       | TODO       |           |
 | replay response from local database             | TODO       |           |
 | edit response data                              | TODO       |           |
