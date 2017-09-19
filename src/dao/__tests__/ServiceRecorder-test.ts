@@ -7,7 +7,7 @@ describe("ServiceRecorder Tests", () => {
     const mockResponse = {hearder: "someheader", body: "somebody"};
 
     before((done) => {
-        ServiceRecorder.getInstance();
+        ServiceRecorder.getInstanceWithPath(__dirname + "/tingo");
         done();
     });
 
