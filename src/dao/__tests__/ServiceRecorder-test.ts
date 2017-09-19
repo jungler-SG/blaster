@@ -1,10 +1,11 @@
 import "mocha";
-import { expect, assert } from "chai";
+import { assert } from "chai";
+const Q = require("q");
 import ServiceRecorder from "../ServiceRecorder";
 
 describe("ServiceRecorder Tests", () => {
 
-    const mockTransaction = {
+    const mockTransactionGet = {
         request: {
             method: "GET",
             url: "https://dpb-apac-uat.credit-suisse.com/onecms/en/copyright.json",
@@ -54,33 +55,34 @@ describe("ServiceRecorder Tests", () => {
             }
         }
     };
+    let recorder;
 
     before((done) => {
-        ServiceRecorder.getInstanceWithPath(__dirname + "/tingo");
+        recorder = ServiceRecorder.getInstanceWithPath(__dirname + "/tingo");
         done();
     });
 
     beforeEach((done) => {
-        ServiceRecorder.getInstance().clearCollection("GET", () => {
-            ServiceRecorder.getInstance().clearCollection("POST", done);
+        Q.nfcall(recorder.clearCollection, "GET")
+        .then(() => {
+            return Q.nfcall(recorder.clearCollection, "POST");
+        }).done(() => {
+            done();
         });
 
     });
 
-    it("should store a new api response", (done) => {
-        const tingoDb = ServiceRecorder.getInstance();
-        console.log(JSON.stringify(mockTransaction));
-        tingoDb.storeGet(mockTransaction, (error: any, result: any) => {
+    it("should store a new GET", (done) => {
+        const tingoDb = recorder;
+        tingoDb.storeGet(mockTransactionGet, (error: any, result: any) => {
             assert(!error);
-            assert(mockTransaction.request.header === result[0].request.header);
-            assert(mockTransaction.request.url === result[0].request.url);
-            assert(mockTransaction.request.queryParam === result[0].request.queryParam);
-            assert(mockTransaction.request.method === result[0].request.method);
-
-            assert(mockTransaction.response.status === result[0].response.status);
-            assert(mockTransaction.response.header === result[0].response.header);
-            assert(mockTransaction.response.body === result[0].response.body);
-            console.log("result: ", JSON.stringify(result));
+            assert(mockTransactionGet.request.header === result[0].request.header);
+            assert(mockTransactionGet.request.url === result[0].request.url);
+            assert(mockTransactionGet.request.queryParam === result[0].request.queryParam);
+            assert(mockTransactionGet.request.method === result[0].request.method);
+            assert(mockTransactionGet.response.status === result[0].response.status);
+            assert(mockTransactionGet.response.header === result[0].response.header);
+            assert(mockTransactionGet.response.body === result[0].response.body);
             done();
         });
 

@@ -18,11 +18,11 @@ export default class ServiceRecorder {
         this.db = new Tingo.Db(path, {});
     }
 
-    public clearCollection(collection: string, callback: () => void): void {
+    public clearCollection = (collection: string, callback: () => any) => {
         this.db.collection(collection).remove(callback);
     }
 
-    public storeGet(response: any, callBack: (error: any, result: any) => void): void {
+    public storeGet = (response: any, callBack: (error: any, result: any) => any) => {
         const collection = this.db.collection("GET");
         collection.insert(response, callBack);
     }
