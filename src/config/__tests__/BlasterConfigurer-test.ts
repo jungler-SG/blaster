@@ -24,12 +24,12 @@ describe("BlasterConfigurer", () => {
 
     it("give null URI should return undefined", () => {
         const server = blasterConfigurer.getTargetServerConfigByUri(null);
-        expect(server).to.be.equal(undefined);
+        expect(server).to.be.eql({});
     });
 
     it("give not exist URI should return undefined", () => {
         const server = blasterConfigurer.getTargetServerConfigByUri("/test/not_exist");
-        expect(server).to.be.equal(undefined);
+        expect(server).to.be.eql({});
     });
 
 });
