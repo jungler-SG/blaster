@@ -29,7 +29,7 @@ describe("ServiceRecorder Tests", () => {
             }
         },
         response: {
-            status: "200",
+            status: 200,
             header: {
                 "Accept-Ranges": "bytes",
                 "Connection": "close",
@@ -72,7 +72,7 @@ describe("ServiceRecorder Tests", () => {
 
     it("should store a new GET", async () => {
         try {
-            const result = await recorder.storeGet(mockTransactionGet);
+            const result = await recorder.insertGet(mockTransactionGet);
             assert(mockTransactionGet.request.header === result[0].request.header);
             assert(mockTransactionGet.request.url === result[0].request.url);
             assert(mockTransactionGet.request.queryParam === result[0].request.queryParam);
@@ -99,9 +99,23 @@ describe("ServiceRecorder Tests", () => {
 
     it("should return result when a GET request is already there", async () => {
         try {
-            await recorder.storeGet(mockTransactionGet);
+            await recorder.insertGet(mockTransactionGet);
             const has = await recorder.hasGetRequest(mockTransactionGet.request);
             expect(has).to.equal(true);
+        } catch (error) {
+            assert(!error);
+            console.log("Promise error: ", error);
+        }
+    });
+
+    it("should update when a GET request is already there", async () => {
+        try {
+            await recorder.insertGet(mockTransactionGet);
+            const newGet = mockTransactionGet;
+            newGet.response.status = 500;
+            await recorder.updateExistingGet(newGet);
+            const updatedGet = await recorder.fetchGetRequest(newGet.request);
+            assert(updatedGet.response.status === 500);
         } catch (error) {
             assert(!error);
             console.log("Promise error: ", error);

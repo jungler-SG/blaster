@@ -25,11 +25,19 @@ export default class ServiceRecorder {
         });
     }
 
-    public storeGet = (getTransaction) => {
-        const requestHash = hash(getTransaction.request);
-        const getRequestWithHash = {hash: requestHash, request: getTransaction.request, response: getTransaction.response};
+    public insertGet = (getTnx) => {
+        const requestHash = hash(getTnx.request);
+        const getRequestWithHash = {hash: requestHash, request: getTnx.request, response: getTnx.response};
         return new Promise((resolve) => {
             this.db.collection("GET").insert(getRequestWithHash, (error, result) => resolve(result));
+        });
+    }
+
+    public updateExistingGet = (getTnx) => {
+        const requestHash = hash(getTnx.request);
+        const getTxnWithHash = {hash: requestHash, request: getTnx.request, response: getTnx.response};
+        return new Promise((resolve) => {
+            this.db.collection("GET").update({hash: requestHash}, getTxnWithHash, (error, result) => resolve(result));
         });
     }
 
