@@ -1,5 +1,6 @@
 const Tingo = require("tingodb")();
 const hash = require("object-hash");
+import {DataCollectionType} from "./../model/Constants";
 
 export default class ServiceRecorder {
 
@@ -12,6 +13,7 @@ export default class ServiceRecorder {
     }
 
     private static instance: ServiceRecorder;
+    private static SERVICE_RECORDS = DataCollectionType[DataCollectionType.SERVICE_RECORDS];
 
     public db;
 
@@ -29,7 +31,7 @@ export default class ServiceRecorder {
         const requestHash = hash(getTnx.request);
         const getRequestWithHash = {hash: requestHash, request: getTnx.request, response: getTnx.response};
         return new Promise((resolve) => {
-            this.db.collection("GET").insert(getRequestWithHash, (error, result) => resolve(result));
+            this.db.collection(ServiceRecorder.SERVICE_RECORDS).insert(getRequestWithHash, (error, result) => resolve(result));
         });
     }
 
@@ -37,7 +39,7 @@ export default class ServiceRecorder {
         const requestHash = hash(getTnx.request);
         const getTxnWithHash = {hash: requestHash, request: getTnx.request, response: getTnx.response};
         return new Promise((resolve) => {
-            this.db.collection("GET").update({hash: requestHash}, getTxnWithHash, (error, result) => resolve(result));
+            this.db.collection(ServiceRecorder.SERVICE_RECORDS).update({hash: requestHash}, getTxnWithHash, (error, result) => resolve(result));
         });
     }
 
@@ -53,7 +55,7 @@ export default class ServiceRecorder {
     public fetchGetRequest = (request: any) => {
         const requestHash = hash(request);
         return new Promise((resolve) => {
-            this.db.collection("GET").findOne({hash: requestHash}, (error, result) => resolve(result));
+            this.db.collection(ServiceRecorder.SERVICE_RECORDS).findOne({hash: requestHash}, (error, result) => resolve(result));
         });
     }
 
