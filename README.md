@@ -1,7 +1,7 @@
 
 # Blaster
 
-[![Build Status](https://travis-ci.org/unclebean/blaster.svg?branch=poc-koa)](https://travis-ci.org/unclebean/blaster/branches#)
+[![Build Status](https://travis-ci.org/jungler-SG/blaster.svg?branch=master)](https://travis-ci.org/jungler-SG/blaster)
 [![Gitter](https://img.shields.io/gitter/room/gitterHQ/gitter.svg)](https://gitter.im/blaster-record-replay) 
 
 **Blaster is a tool of record & replay RESTful services for front-end projects, build with typescript**

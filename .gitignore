@@ -5,3 +5,4 @@ node_modules/
 src/**/*.js
 bin/
 src/dao/__tests__/tingo/*
+blaster.iml

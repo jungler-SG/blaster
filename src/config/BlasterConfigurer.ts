@@ -20,9 +20,11 @@ export default class BlasterConfigurer {
     }
 
     public getTargetServerConfigByUri(uri: string): IServer {
-        return _.findLast(this.serverList, (server: IServer) => {
+        uri = uri || "";
+        const targetServer = _.findLast(this.serverList, (server: IServer) => {
             return uri.indexOf(server.endpoint) !== -1;
         });
+        return targetServer || {} as IServer;
     }
 
     private getConfigFromOptions(server: any): IConfigModel {
