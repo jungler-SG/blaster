@@ -1,6 +1,6 @@
 import "mocha";
 import { expect, assert } from "chai";
-import ServiceRecorder from "../ServiceRecorder";
+import ServiceRecorder from "../TingoDao";
 
 describe("ServiceRecorder Tests", () => {
 
