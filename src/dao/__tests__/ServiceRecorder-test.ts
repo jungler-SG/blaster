@@ -55,6 +55,7 @@ describe("ServiceRecorder Tests", () => {
             }
         }
     };
+
     let recorder;
 
     before((done) => {
@@ -62,14 +63,13 @@ describe("ServiceRecorder Tests", () => {
         done();
     });
 
-    beforeEach((done) => {
-        Q.nfcall(recorder.clearCollection, "GET")
-        .then(() => {
-            return Q.nfcall(recorder.clearCollection, "POST");
-        }).done(() => {
-            done();
-        });
-
+    beforeEach(async () => {
+        try {
+            const result = await recorder.clearCollection("GET");
+            console.log(result);
+        } catch (error) {
+            console.log("Promise error: ", error);
+        }
     });
 
     it("should store a new GET", (done) => {

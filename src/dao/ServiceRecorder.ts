@@ -19,10 +19,11 @@ export default class ServiceRecorder {
         this.db = new Tingo.Db(path, {});
     }
 
-    public clearCollection = (collection: string, callback: () => any) => {
-        this.db.collection(collection).remove(callback);
+    public clearCollection = (collection: string) => {
+        return new Promise((resolve) => {
+            this.db.collection(collection).remove((result) => resolve(result));
+        });
     }
-
     public storeGet = (getTransaction: any, callBack: (error: any, result: any) => any) => {
         const requestHash = hash(getTransaction.request);
         const getRequestWithHash = {hash: requestHash, request: getTransaction.request, response: getTransaction.response};
