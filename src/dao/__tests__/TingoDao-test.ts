@@ -122,4 +122,39 @@ describe("ServiceRecorder Tests", () => {
         }
     });
 
+    it("should not do anything when a GET request is not there", async () => {
+        try {
+            await recorder.updateExistingGet(mockTransactionGet);
+            const has = await recorder.hasGetRequest(mockTransactionGet.request);
+            expect(has).to.equal(false);
+        } catch (error) {
+            assert(!error);
+            console.log("Promise error: ", error);
+        }
+    });
+
+    it("should store by updateOrInsertGet when a GET request is already there", async () => {
+        try {
+            await recorder.insertGet(mockTransactionGet);
+            const newGet = mockTransactionGet;
+            newGet.response.status = 500;
+            await recorder.updateOrInsertGet(newGet);
+            const updatedGet = await recorder.fetchGetRequest(newGet.request);
+            assert(updatedGet.response.status === 500);
+        } catch (error) {
+            assert(!error);
+            console.log("Promise error: ", error);
+        }
+    });
+
+    it("should store by updateOrInsertGet when a GET request is not there", async () => {
+        try {
+            await recorder.updateOrInsertGet(mockTransactionGet);
+            const has = await recorder.hasGetRequest(mockTransactionGet.request);
+            expect(has).to.equal(true);
+        } catch (error) {
+            assert(!error);
+            console.log("Promise error: ", error);
+        }
+    });
 });

@@ -41,6 +41,15 @@ export default class ServiceRecorder {
         });
     }
 
+    public updateOrInsertGet = async (getTnx) => {
+        const has = await this.hasGetRequest(getTnx.request);
+        if (has) {
+            return this.updateExistingGet(getTnx);
+        } else {
+            return this.insertGet(getTnx);
+        }
+    }
+
     public fetchGetRequest = (request: any) => {
         const requestHash = hash(request);
         return new Promise((resolve) => {
