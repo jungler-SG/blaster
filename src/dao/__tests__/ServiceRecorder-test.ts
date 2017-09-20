@@ -1,6 +1,5 @@
 import "mocha";
 import { expect, assert } from "chai";
-const Q = require("q");
 import ServiceRecorder from "../ServiceRecorder";
 
 describe("ServiceRecorder Tests", () => {
