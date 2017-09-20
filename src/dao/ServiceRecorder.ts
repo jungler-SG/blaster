@@ -21,20 +21,28 @@ export default class ServiceRecorder {
 
     public clearCollection = (collection: string) => {
         return new Promise((resolve) => {
-            this.db.collection(collection).remove((result) => resolve(result));
+            this.db.collection(collection).remove((error, result) => resolve(result));
         });
     }
-    public storeGet = (getTransaction: any, callBack: (error: any, result: any) => any) => {
+
+    public storeGet = (getTransaction) => {
         const requestHash = hash(getTransaction.request);
         const getRequestWithHash = {hash: requestHash, request: getTransaction.request, response: getTransaction.response};
-        const collection = this.db.collection("GET");
-        collection.insert(getRequestWithHash, callBack);
+        return new Promise((resolve) => {
+            this.db.collection("GET").insert(getRequestWithHash, (error, result) => resolve(result));
+        });
     }
 
-    public hasGetRequest = (request: any, callBack: (error: any, result: any) => any) => {
+    public fetchGetRequest = (request: any) => {
         const requestHash = hash(request);
-        const collection = this.db.collection("GET");
-        collection.findOne({hash: requestHash}, callBack);
+        return new Promise((resolve) => {
+            this.db.collection("GET").findOne({hash: requestHash}, (error, result) => resolve(result));
+        });
+    }
+
+    public hasGetRequest = async (request: any) => {
+        const getTxn = await this.fetchGetRequest(request);
+        return getTxn !== null;
     }
 
 }
