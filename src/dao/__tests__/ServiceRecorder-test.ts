@@ -87,17 +87,25 @@ describe("ServiceRecorder Tests", () => {
     });
 
     it("should return null when a GET request is not there", async () => {
-        const has = await recorder.hasGetRequest(mockTransactionGet.request);
-        console.log(has);
-        expect(has).to.equal(false);
-
+        try {
+            const has = await recorder.hasGetRequest(mockTransactionGet.request);
+            console.log(has);
+            expect(has).to.equal(false);
+        } catch (error) {
+            assert(!error);
+            console.log("Promise error: ", error);
+        }
     });
 
     it("should return result when a GET request is already there", async () => {
-        await recorder.storeGet(mockTransactionGet);
-        const has = await recorder.hasGetRequest(mockTransactionGet.request);
-        expect(has).to.equal(true);
-
+        try {
+            await recorder.storeGet(mockTransactionGet);
+            const has = await recorder.hasGetRequest(mockTransactionGet.request);
+            expect(has).to.equal(true);
+        } catch (error) {
+            assert(!error);
+            console.log("Promise error: ", error);
+        }
     });
 
 });
