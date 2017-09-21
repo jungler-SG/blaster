@@ -126,6 +126,7 @@ describe("ServiceRecorder Tests", () => {
     it("should store a new GET", async () => {
         try {
             const result = await recorder.insertServiceRecord(mockTransactionGet);
+            console.log("insert result", result);
             assert(mockTransactionGet.request.header === result[0].request.header);
             assert(mockTransactionGet.request.url === result[0].request.url);
             assert(mockTransactionGet.request.queryParam === result[0].request.queryParam);
@@ -204,6 +205,18 @@ describe("ServiceRecorder Tests", () => {
             await recorder.updateOrInsertRecord(mockTransactionGet);
             const has = await recorder.hasRequest(mockTransactionGet.request);
             expect(has).to.equal(true);
+        } catch (error) {
+            assert(!error);
+            console.log("Promise error: ", error);
+        }
+    });
+
+    it("should delete record when a GET request is there", async () => {
+        try {
+            await recorder.insertServiceRecord(mockTransactionGet);
+            await recorder.deleteServiceRecord(mockTransactionGet.request);
+            const has = await recorder.hasRequest(mockTransactionGet.request);
+            expect(has).to.equal(false);
         } catch (error) {
             assert(!error);
             console.log("Promise error: ", error);

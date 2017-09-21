@@ -21,12 +21,6 @@ export default class ServiceRecorder {
         this.db = new Tingo.Db(path, {});
     }
 
-    public clearCollection = (collection: string) => {
-        return new Promise((resolve) => {
-            this.db.collection(collection).remove((error, result) => resolve(result));
-        });
-    }
-
     public insertServiceRecord = (getTnx) => {
         const requestHash = hash(getTnx.request);
         const getRequestWithHash = {hash: requestHash, request: getTnx.request, response: getTnx.response};
@@ -56,6 +50,19 @@ export default class ServiceRecorder {
         const requestHash = hash(request);
         return new Promise((resolve) => {
             this.db.collection(ServiceRecorder.SERVICE_RECORDS).findOne({hash: requestHash}, (error, result) => resolve(result));
+        });
+    }
+
+    public clearCollection = (collection: string) => {
+        return new Promise((resolve) => {
+            this.db.collection(collection).remove((error, result) => resolve(result));
+        });
+    }
+
+    public deleteServiceRecord = (request: any) => {
+        const requestHash = hash(request);
+        return new Promise((resolve) => {
+            this.db.collection(ServiceRecorder.SERVICE_RECORDS).remove({hash: requestHash}, (error, result) => resolve(result));
         });
     }
 
