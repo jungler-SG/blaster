@@ -34,10 +34,11 @@ Run Blaster
 | ----------------------------------------------- |:----------:| ---------:|
 | yaml server configuration handler               | TODO       |   Hou     |
 | start **http/https** server                     | TODO       |           |
-| explore and setup local db                      | TODO       |   Jeff    |
-| record get/post request to local database       | TODO       |           |
+| explore and setup local db                      | DONE       |   Jeff    |
+| record get/post request to local database       | TODO       |   Jeff    |
 | replay response from local database             | TODO       |           |
 | edit response data                              | TODO       |           |
 | create new endpoint & record in local database  | TODO       |           |
 | multiple real backend support                   | TODO       |           |
 | whitelist endpoint support                      | TODO       |           |
+| ignored request param support                   | TODO       |           |
