@@ -27,7 +27,7 @@ export default class ServiceRecorder {
         });
     }
 
-    public insertGet = (getTnx) => {
+    public insertServiceRecord = (getTnx) => {
         const requestHash = hash(getTnx.request);
         const getRequestWithHash = {hash: requestHash, request: getTnx.request, response: getTnx.response};
         return new Promise((resolve) => {
@@ -35,7 +35,7 @@ export default class ServiceRecorder {
         });
     }
 
-    public updateExistingGet = (getTnx) => {
+    public updateExistingRecord = (getTnx) => {
         const requestHash = hash(getTnx.request);
         const getTxnWithHash = {hash: requestHash, request: getTnx.request, response: getTnx.response};
         return new Promise((resolve) => {
@@ -43,24 +43,24 @@ export default class ServiceRecorder {
         });
     }
 
-    public updateOrInsertGet = async (getTnx) => {
-        const has = await this.hasGetRequest(getTnx.request);
+    public updateOrInsertRecord = async (getTnx) => {
+        const has = await this.hasRequest(getTnx.request);
         if (has) {
-            return this.updateExistingGet(getTnx);
+            return this.updateExistingRecord(getTnx);
         } else {
-            return this.insertGet(getTnx);
+            return this.insertServiceRecord(getTnx);
         }
     }
 
-    public fetchGetRequest = (request: any) => {
+    public fetchServiceRecord = (request: any) => {
         const requestHash = hash(request);
         return new Promise((resolve) => {
             this.db.collection(ServiceRecorder.SERVICE_RECORDS).findOne({hash: requestHash}, (error, result) => resolve(result));
         });
     }
 
-    public hasGetRequest = async (request: any) => {
-        const getTxn = await this.fetchGetRequest(request);
+    public hasRequest = async (request: any) => {
+        const getTxn = await this.fetchServiceRecord(request);
         return getTxn !== null;
     }
 

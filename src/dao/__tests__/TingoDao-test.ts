@@ -125,7 +125,7 @@ describe("ServiceRecorder Tests", () => {
 
     it("should store a new GET", async () => {
         try {
-            const result = await recorder.insertGet(mockTransactionGet);
+            const result = await recorder.insertServiceRecord(mockTransactionGet);
             assert(mockTransactionGet.request.header === result[0].request.header);
             assert(mockTransactionGet.request.url === result[0].request.url);
             assert(mockTransactionGet.request.queryParam === result[0].request.queryParam);
@@ -141,7 +141,7 @@ describe("ServiceRecorder Tests", () => {
 
     it("should return null when a GET request is not there", async () => {
         try {
-            const has = await recorder.hasGetRequest(mockTransactionGet.request);
+            const has = await recorder.hasRequest(mockTransactionGet.request);
             expect(has).to.equal(false);
         } catch (error) {
             assert(!error);
@@ -151,8 +151,8 @@ describe("ServiceRecorder Tests", () => {
 
     it("should return result when a GET request is already there", async () => {
         try {
-            await recorder.insertGet(mockTransactionGet);
-            const has = await recorder.hasGetRequest(mockTransactionGet.request);
+            await recorder.insertServiceRecord(mockTransactionGet);
+            const has = await recorder.hasRequest(mockTransactionGet.request);
             expect(has).to.equal(true);
         } catch (error) {
             assert(!error);
@@ -162,11 +162,11 @@ describe("ServiceRecorder Tests", () => {
 
     it("should update when a GET request is already there", async () => {
         try {
-            await recorder.insertGet(mockTransactionGet);
+            await recorder.insertServiceRecord(mockTransactionGet);
             const newGet = mockTransactionGet;
             newGet.response.status = 500;
-            await recorder.updateExistingGet(newGet);
-            const updatedGet = await recorder.fetchGetRequest(newGet.request);
+            await recorder.updateExistingRecord(newGet);
+            const updatedGet = await recorder.fetchServiceRecord(newGet.request);
             assert(updatedGet.response.status === 500);
         } catch (error) {
             assert(!error);
@@ -176,8 +176,8 @@ describe("ServiceRecorder Tests", () => {
 
     it("should not do anything when a GET request is not there", async () => {
         try {
-            await recorder.updateExistingGet(mockTransactionGet);
-            const has = await recorder.hasGetRequest(mockTransactionGet.request);
+            await recorder.updateExistingRecord(mockTransactionGet);
+            const has = await recorder.hasRequest(mockTransactionGet.request);
             expect(has).to.equal(false);
         } catch (error) {
             assert(!error);
@@ -185,13 +185,13 @@ describe("ServiceRecorder Tests", () => {
         }
     });
 
-    it("should store by updateOrInsertGet when a GET request is already there", async () => {
+    it("should store by updateOrInsertRecord when a GET request is already there", async () => {
         try {
-            await recorder.insertGet(mockTransactionGet);
+            await recorder.insertServiceRecord(mockTransactionGet);
             const newGet = mockTransactionGet;
             newGet.response.status = 500;
-            await recorder.updateOrInsertGet(newGet);
-            const updatedGet = await recorder.fetchGetRequest(newGet.request);
+            await recorder.updateOrInsertRecord(newGet);
+            const updatedGet = await recorder.fetchServiceRecord(newGet.request);
             assert(updatedGet.response.status === 500);
         } catch (error) {
             assert(!error);
@@ -199,10 +199,10 @@ describe("ServiceRecorder Tests", () => {
         }
     });
 
-    it("should store by updateOrInsertGet when a GET request is not there", async () => {
+    it("should store by updateOrInsertRecord when a GET request is not there", async () => {
         try {
-            await recorder.updateOrInsertGet(mockTransactionGet);
-            const has = await recorder.hasGetRequest(mockTransactionGet.request);
+            await recorder.updateOrInsertRecord(mockTransactionGet);
+            const has = await recorder.hasRequest(mockTransactionGet.request);
             expect(has).to.equal(true);
         } catch (error) {
             assert(!error);
