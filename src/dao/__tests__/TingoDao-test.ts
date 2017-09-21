@@ -126,7 +126,6 @@ describe("ServiceRecorder Tests", () => {
     it("should store a new GET", async () => {
         try {
             const result = await recorder.insertServiceRecord(mockTransactionGet);
-            console.log("insert result", result);
             assert(mockTransactionGet.request.header === result[0].request.header);
             assert(mockTransactionGet.request.url === result[0].request.url);
             assert(mockTransactionGet.request.queryParam === result[0].request.queryParam);
@@ -135,8 +134,8 @@ describe("ServiceRecorder Tests", () => {
             assert(mockTransactionGet.response.header === result[0].response.header);
             assert(mockTransactionGet.response.body === result[0].response.body);
         } catch (error) {
-            assert(!error);
             console.log("Promise error: ", error);
+            assert(!error);
         }
     });
 
@@ -145,8 +144,8 @@ describe("ServiceRecorder Tests", () => {
             const has = await recorder.hasRequest(mockTransactionGet.request);
             expect(has).to.equal(false);
         } catch (error) {
-            assert(!error);
             console.log("Promise error: ", error);
+            assert(!error);
         }
     });
 
@@ -156,8 +155,8 @@ describe("ServiceRecorder Tests", () => {
             const has = await recorder.hasRequest(mockTransactionGet.request);
             expect(has).to.equal(true);
         } catch (error) {
-            assert(!error);
             console.log("Promise error: ", error);
+            assert(!error);
         }
     });
 
@@ -170,8 +169,8 @@ describe("ServiceRecorder Tests", () => {
             const updatedGet = await recorder.fetchServiceRecord(newGet.request);
             assert(updatedGet.response.status === 500);
         } catch (error) {
-            assert(!error);
             console.log("Promise error: ", error);
+            assert(!error);
         }
     });
 
@@ -181,8 +180,8 @@ describe("ServiceRecorder Tests", () => {
             const has = await recorder.hasRequest(mockTransactionGet.request);
             expect(has).to.equal(false);
         } catch (error) {
-            assert(!error);
             console.log("Promise error: ", error);
+            assert(!error);
         }
     });
 
@@ -195,8 +194,8 @@ describe("ServiceRecorder Tests", () => {
             const updatedGet = await recorder.fetchServiceRecord(newGet.request);
             assert(updatedGet.response.status === 500);
         } catch (error) {
-            assert(!error);
             console.log("Promise error: ", error);
+            assert(!error);
         }
     });
 
@@ -206,20 +205,25 @@ describe("ServiceRecorder Tests", () => {
             const has = await recorder.hasRequest(mockTransactionGet.request);
             expect(has).to.equal(true);
         } catch (error) {
-            assert(!error);
             console.log("Promise error: ", error);
+            assert(!error);
         }
     });
 
-    it("should delete record when a GET request is there", async () => {
+    it("should delete record when a GET request", async () => {
         try {
+            let newGet = JSON.parse(JSON.stringify(mockTransactionGet));
+            newGet.request.method = "POST";
             await recorder.insertServiceRecord(mockTransactionGet);
+            await recorder.insertServiceRecord(newGet);
             await recorder.deleteServiceRecord(mockTransactionGet.request);
-            const has = await recorder.hasRequest(mockTransactionGet.request);
-            expect(has).to.equal(false);
+            const hasTheDeleted = await recorder.hasRequest(mockTransactionGet.request);
+            expect(hasTheDeleted).to.equal(false);
+            const hasThePersist = await recorder.hasRequest(newGet.request);
+            expect(hasThePersist).to.equal(true);
         } catch (error) {
-            assert(!error);
             console.log("Promise error: ", error);
+            assert(!error);
         }
     });
 });
