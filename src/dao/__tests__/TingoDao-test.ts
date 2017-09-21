@@ -162,11 +162,12 @@ describe("ServiceRecorder Tests", () => {
 
     it("should update when a GET request is already there", async () => {
         try {
+            assert(mockTransactionGet.response.status === 200);
             await recorder.insertServiceRecord(mockTransactionGet);
-            const newGet = mockTransactionGet;
-            newGet.response.status = 500;
-            await recorder.updateExistingRecord(newGet);
-            const updatedGet = await recorder.fetchServiceRecord(newGet.request);
+            const newTxnGet = JSON.parse(JSON.stringify(mockTransactionGet));
+            newTxnGet.response.status = 500;
+            await recorder.updateExistingRecord(newTxnGet);
+            const updatedGet = await recorder.fetchServiceRecord(newTxnGet.request);
             assert(updatedGet.response.status === 500);
         } catch (error) {
             console.log("Promise error: ", error);
@@ -187,8 +188,9 @@ describe("ServiceRecorder Tests", () => {
 
     it("should store by updateOrInsertRecord when a GET request is already there", async () => {
         try {
+            assert(mockTransactionGet.response.status === 200);
             await recorder.insertServiceRecord(mockTransactionGet);
-            const newGet = mockTransactionGet;
+            const newGet = JSON.parse(JSON.stringify(mockTransactionGet));
             newGet.response.status = 500;
             await recorder.updateOrInsertRecord(newGet);
             const updatedGet = await recorder.fetchServiceRecord(newGet.request);
