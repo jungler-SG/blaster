@@ -214,7 +214,7 @@ describe("ServiceRecorder Tests", () => {
 
     it("should delete record when a GET request", async () => {
         try {
-            let newGet = JSON.parse(JSON.stringify(mockTransactionGet));
+            const newGet = JSON.parse(JSON.stringify(mockTransactionGet));
             newGet.request.method = "POST";
             await recorder.insertServiceRecord(mockTransactionGet);
             await recorder.insertServiceRecord(newGet);

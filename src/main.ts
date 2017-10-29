@@ -23,11 +23,12 @@ export function blasterInfo(args) {
     return info;
 }
 
-export function startup(args) {
+export async function startup(args) {
     try {
         BlasterConfigurer.getInstance(fs.readFileSync(args._[0], "utf8"));
-        new BlasterServer().start();
+        await new BlasterServer().start();
     } catch (e) {
+        console.log(e.message);
         console.log("Please follow readme to provide correct .yml file.");
     }
 }

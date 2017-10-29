@@ -1,0 +1,14 @@
+---
+  server:
+    port: 2333
+    proxyType: "HTTP"
+    replay: true
+  targets:
+    -
+      hostName: "jsonplaceholder.typicode.com"
+      endpoint: ""
+      port: 80
+    -
+      hostName: "jsonplaceholder.typicode.com"
+      endpoint: "/todos/1"
+      port: 80
