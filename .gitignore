@@ -2,6 +2,7 @@ node_modules/
 .idea/
 .iml
 .DS_Store
+src/**/*.js
 bin/
 src/dao/__tests__/tingo/*
 blaster.iml
