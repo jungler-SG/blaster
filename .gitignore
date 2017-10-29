@@ -3,5 +3,4 @@ node_modules/
 .iml
 src/**/*.js
 bin/
-src/dao/__tests__/tingo/*
 blaster.iml
